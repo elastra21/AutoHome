@@ -39,7 +39,8 @@ module.exports = function(passport) {
                 return done(null, false); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
-            return done(null, true);
+            user.local.password = undefined;
+            return done(null, user);
         });
 
     }));
@@ -106,7 +107,8 @@ module.exports = function(passport) {
                 newUser.save(function(err) {
                     if (err)
                         throw err;
-                    return done(null, true);
+                    newUser.local.password = undefined;
+                    return done(null, newUser);
                 });
             }
 

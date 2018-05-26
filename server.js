@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
 var ipaddress = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8000;
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');

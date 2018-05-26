@@ -3,6 +3,7 @@ module.exports = function(app, passport) {
     app.post('/login', function(req, res, next) {
       passport.authenticate('local-login', function(err, user, info) {
         if (user) { return res.json({"user": user}) }
+        else{res.("")}
     })(req, res, next);
     });
 

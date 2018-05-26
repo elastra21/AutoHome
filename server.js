@@ -31,7 +31,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(flash());
+        app.get('/', function(req, res) {
+        res.render('index.html'); // load the index.ejs file
+    }); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport

@@ -1,7 +1,7 @@
 // app/routes.js
 module.exports = function(app, passport) {
 
-        app.get('/', isLoggedIn, function(req, res) {
+        app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
 

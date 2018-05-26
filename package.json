@@ -1,5 +1,5 @@
 {
-  "name": "node-authentication",
+  "name": "autohome",
   "main": "server.js",
   "dependencies": {
     "express": "~4.14.0",
@@ -17,5 +17,21 @@
     "cookie-parser": "~1.4.3",
     "method-override": "~2.3.6",
     "express-session": "~1.14.1"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "1.0.0",
+  "description": "pruebas de autohome",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elastra21/AutoHome.git"
+  },
+  "author": "Emmanuel Lastra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elastra21/AutoHome/issues"
+  },
+  "homepage": "https://github.com/elastra21/AutoHome#readme"
 }

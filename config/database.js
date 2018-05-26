@@ -20,7 +20,7 @@ exports.db = function () {
 
     }
   } else {
-    mongoURL = 'mongodb://127.0.0.1:27017/ToDo'
+    mongoURL = 'mongodb://127.0.0.1:27017/login'
   }
   return mongoURL
 

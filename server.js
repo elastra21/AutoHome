@@ -13,7 +13,6 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
@@ -29,18 +28,7 @@ app.use(bodyParser()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 
-app.set('view engine', 'ejs'); // set up ejs for templating
-
-// required for passport
-app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================

@@ -16,6 +16,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 
 var configDB = require('./config/database.js');
+app.engine('html', require('ejs').renderFile);
 
 // configuration ===============================================================
 mongoose.connect(configDB.db(),{useMongoClient: true }); // connect to our database

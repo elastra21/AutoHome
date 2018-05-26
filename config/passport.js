@@ -92,7 +92,7 @@ module.exports = function(passport) {
 
             // check to see if theres already a user with that email
             if (user) {
-                return done(null, false);
+                return done(null, null);
             } else {
 
                 // if there is no user with that email

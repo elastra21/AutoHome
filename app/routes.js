@@ -2,7 +2,7 @@
 module.exports = function(app, passport) {
     app.post('/login', function(req, res, next) {
       passport.authenticate('local-login', function(err, user, info) {
-        if (!user) { return res.json({"result":false}); }
+        if (!user) { return res.json({"result":1}); }
         else{
         return res.json({"user": user});
     }
@@ -12,7 +12,7 @@ module.exports = function(app, passport) {
     // process the signup form
     app.post('/signup', function(req, res, next) {
       passport.authenticate('local-signup', function(err, user, info) {
-        if (!user) { return res.json({"result":false}); }
+        if (!user) { return res.json({"result":2}); }
         else{
         return res.json({"user": user});
     }

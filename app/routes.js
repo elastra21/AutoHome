@@ -19,4 +19,5 @@ module.exports = function(app, passport) {
     })(req, res, next);
     });
 };
+//esto si está bien
  

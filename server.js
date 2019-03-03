@@ -1,8 +1,7 @@
 //  OpenShift sample Node application
 var express = require('express'),
     app     = express(),
-    morgan  = require('morgan'),
-    mongoose = require('mongoose');
+    morgan  = require('morgan');
     
 Object.assign=require('object-assign')
 var configDB = require('./config/database.js');

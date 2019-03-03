@@ -37,6 +37,8 @@ exports.db = function () {
       mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
       mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
     }
+  } else {
+    mongoURL = 'mongodb://127.0.0.1:27017/login'
   }
   return mongoURL
 

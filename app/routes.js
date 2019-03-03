@@ -1,5 +1,9 @@
 // app/routes.js
 module.exports = function(app, passport) {
+    app.get('/', function (req, res) {
+        res.render('index.html', { pageCountMessage : null});
+    });
+
     app.post('/login', function(req, res, next) {
       passport.authenticate('local-login', function(err, user, info) {
         if (!user) { return res.json({"result":1}); }

@@ -4,6 +4,10 @@ module.exports = function(app, passport) {
         res.render('index.html'); // load the index.ejs file
     });
 
+    app.use(function(req, res, next) {
+      res.status(404).send('Sorry cant find that!');
+    });
+
 
     app.post('/login', function(req, res, next) {
       passport.authenticate('local-login', function(err, user, info) {

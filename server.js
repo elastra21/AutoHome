@@ -16,7 +16,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 // configuration ===============================================================
 app.use(morgan('combined'))
 mongoose.connect(configDB.db(),{useMongoClient: true }); // connect to our database
-app.set('view engine', 'ejs'); // set up ejs for templating
+app.engine('html', require('ejs').renderFile);
 
 require('./config/passport')(passport); // pass passport for configuration
 

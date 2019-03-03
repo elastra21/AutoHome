@@ -25,11 +25,6 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 //require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-app.listen(port, ipaddress, function() {
-    console.log('The magic happens on ' +ipaddress+':'+ port);
-});
-
-module.exports = app ;
 
 // error handling
 app.use(function(err, req, res, next){

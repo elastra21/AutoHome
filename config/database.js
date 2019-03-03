@@ -22,7 +22,7 @@ exports.db = function () {
         mongoURL += mongoUser + ':' + mongoPassword + '@';
       }
       mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
-      mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
+      mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase +'/login';
 
     }
   } else {

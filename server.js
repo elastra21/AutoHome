@@ -12,12 +12,12 @@ var ipaddress = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0'
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 // configuration ===============================================================
-mongoose.connect(configDB.db(),{useMongoClient: true }); // connect to our database
+//mongoose.connect(configDB.db(),{useMongoClient: true }); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
-app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 

@@ -7,12 +7,12 @@ var app      = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var bodyParser = require('body-parser');
-//var configDB = require('./config/database.js');
+var configDB = require('./config/database.js');
 var ipaddress = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 // configuration ===============================================================
-//mongoose.connect(configDB.db(),{useMongoClient: true }); // connect to our database
+mongoose.connect(configDB.db(),{useMongoClient: true }); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -27,4 +27,5 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 // launch ======================================================================
 app.listen(port, ipaddress, function() {
     console.log('The magic happens on ' +ipaddress+':'+ port);
+    console.log('Connected to MongoDB at: %s', configDB.db());
 });

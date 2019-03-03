@@ -4,74 +4,32 @@ var express = require('express'),
     morgan  = require('morgan');
     
 Object.assign=require('object-assign')
+//var mongoose = require('mongoose');
+//var passport = require('passport');
+//var bodyParser = require('body-parser');
 var configDB = require('./config/database.js');
-app.engine('html', require('ejs').renderFile);
-app.use(morgan('combined'))
-
+var ipaddress = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
-var ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
-var mongoURLLabel = "";
 
+// configuration ===============================================================
+//mongoose.connect(configDB.db(),{useMongoClient: true }); // connect to our database
 
-var db = null,
-    dbDetails = new Object();
+//require('./config/passport')(passport); // pass passport for configuration
 
-var initDb = function(callback) {
-  if (configDB.db() == null) return;
+// set up our express application
+//app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+//app.use(passport.initialize());
 
-  var mongodb = require('mongodb');
-  if (mongodb == null) return;
+// routes ======================================================================
+//require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-  mongodb.connect(configDB.db(), function(err, conn) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    db = conn;
-    dbDetails.databaseName = db.databaseName;
-    dbDetails.url = mongoURLLabel;
-    dbDetails.type = 'MongoDB';
-
-    console.log('Connected to MongoDB at: %s', configDB.db());
-  });
-};
-
-app.get('/', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    var col = db.collection('counts');
-    // Create a document with request IP and current time of request
-    col.insert({ip: req.ip, date: Date.now()});
-    col.count(function(err, count){
-      if (err) {
-        console.log('Error running count. Message:\n'+err);
-      }
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
-    });
-  } else {
-    res.render('index.html', { pageCountMessage : null});
-  }
+// launch ======================================================================
+app.listen(port, ipaddress, function() {
+    console.log('The magic happens on ' +ipaddress+':'+ port);
 });
 
-app.get('/pagecount', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    db.collection('counts').count(function(err, count ){
-      res.send('{ pageCount: ' + count + '}');
-    });
-  } else {
-    res.send('{ pageCount: -1 }');
-  }
-});
+module.exports = app ;
 
 // error handling
 app.use(function(err, req, res, next){

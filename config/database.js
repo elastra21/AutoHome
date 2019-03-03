@@ -2,19 +2,13 @@ exports.db = function () {
   var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
   mongoURLLabel = "";
 
-  if (mongoURL == null && process.env.database_name) {
-    var mongoHost, mongoPort, mongoDatabase, mongoPassword, mongoUser;
-    mongoDatabase = process.env.database_name;
-    mongoPassword = process.env.password;
-    mongoUser = process.env.username;
-    var mongoUriParts = process.env.uri && process.env.uri.split("//");
-    if (mongoUriParts.length == 2) {
-      mongoUriParts = mongoUriParts[1].split(":");
-      if (mongoUriParts && mongoUriParts.length == 2) {
-        mongoHost = mongoUriParts[0];
-        mongoPort = mongoUriParts[1];
-      }
-    }
+  if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
+    var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
+    mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
+    mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
+    mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
+    mongoPassword = process.env[mongoServiceName + '_PASSWORD'],
+    mongoUser = process.env[mongoServiceName + '_USER'];
 
     if (mongoHost && mongoPort && mongoDatabase) {
       mongoURLLabel = mongoURL = 'mongodb://';
@@ -22,7 +16,7 @@ exports.db = function () {
         mongoURL += mongoUser + ':' + mongoPassword + '@';
       }
       mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
-      mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase +'/login';
+      mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
 
     }
   } else {

@@ -4,11 +4,6 @@ module.exports = function(app, passport) {
         res.render('index.html'); // load the index.ejs file
     });
 
-    app.use(function(req, res, next) {
-      res.status(404).send('Sorry cant find that!');
-    });
-
-
     app.post('/login', function(req, res, next) {
       passport.authenticate('local-login', function(err, user, info) {
         if (!user) { return res.json({"result":1}); }
@@ -26,6 +21,10 @@ module.exports = function(app, passport) {
         return res.json({"user": user});
     }
     })(req, res, next);
+    });
+
+    app.use(function(req, res, next) {
+      res.status(404).send('Sorry cant find that!');
     });
 };
 //esto si está bien

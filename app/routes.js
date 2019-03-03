@@ -1,7 +1,7 @@
 // app/routes.js
 module.exports = function(app, passport) {
     app.get('/', function (req, res) {
-        res.render('index.html');
+        res.render('index.ejs');
     });
 
     app.post('/login', function(req, res, next) {

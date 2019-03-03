@@ -17,7 +17,7 @@ mongoose.connect(configDB.db(),{useMongoClient: true }); // connect to our datab
 require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
@@ -27,7 +27,4 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 // launch ======================================================================
 app.listen(port, ipaddress, function() {
     console.log('The magic happens on ' +ipaddress+':'+ port);
-    console.log('Connected to MongoDB at: %s', configDB.db());
 });
-
-module.exports = app ;

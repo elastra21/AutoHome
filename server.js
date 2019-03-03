@@ -25,7 +25,7 @@ app.use(passport.initialize());
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-app.listen(port, ip);
+app.listen(port, ipaddress);
 console.log('Server running on http://%s:%s', ipaddress, port);
 
 module.exports = app ;

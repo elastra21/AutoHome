@@ -29,3 +29,5 @@ app.listen(port, ipaddress, function() {
     console.log('The magic happens on ' +ipaddress+':'+ port);
     console.log('Connected to MongoDB at: %s', configDB.db());
 });
+
+module.exports = app ;

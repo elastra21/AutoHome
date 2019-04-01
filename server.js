@@ -11,7 +11,7 @@ var bodyParser = require("body-parser");
 const CONNECTION_URI =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/login"; // Heroku server
 //var ipaddress = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0";
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var port = process.env.PORT || 8080;
 
 // configuration ===============================================================
 mongoose.connect(

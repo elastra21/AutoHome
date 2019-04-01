@@ -4,6 +4,8 @@
 // get all the tools we need
 var express = require("express");
 var app = express();
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
 var mongoose = require("mongoose");
 var passport = require("passport");
 var bodyParser = require("body-parser");
@@ -27,11 +29,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
+io.on("connection", function(socket) {
+  socket.on("chat message", function(msg) {
+    io.emit("chat message", msg);
+  });
+});
+
 // routes ======================================================================
 require("./app/routes.js")(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-app.listen(process.env.PORT || 3000, function() {
+http.listen(process.env.PORT || 3000, function() {
   console.log(
     "Express server listening on port %d in %s mode",
     this.address().port,
